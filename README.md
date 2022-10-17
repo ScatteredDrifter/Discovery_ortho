@@ -2,7 +2,7 @@
 
 ![Horizon Choc + MX complete build top photo](images/horizon-choc-mx-top.jpg)
 
-Horizon is a 52 key (4x14) ortholinear keyboard, powered by an Arduino Pro Micro.
+Horizon is a 52 key (4x14) ortholinear keyboard, powered by an RP2040
 
 This keyboard is a grid of 1U keys with no special features: no hotswap, no RGB, no OLED screen, no knobs.
 

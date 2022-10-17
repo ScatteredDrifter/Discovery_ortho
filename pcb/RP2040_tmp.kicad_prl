@@ -33,12 +33,10 @@
       3,
       4,
       5,
-      6,
-      7,
       8,
       9,
       10,
-      11,
+      12,
       13,
       14,
       15,
@@ -64,10 +62,10 @@
       36
     ],
     "visible_layers": "fffffff_ffffffff",
-    "zone_display_mode": 1
+    "zone_display_mode": 0
   },
   "meta": {
-    "filename": "horizon-choc.kicad_prl",
+    "filename": "RP2040_tmp.kicad_prl",
     "version": 3
   },
   "project": {
