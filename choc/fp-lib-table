@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name horizon-footprints)(type KiCad)(uri ${KIPRJMOD}/../../kicad-libraries/horizon-footprints.pretty)(options "")(descr ""))
-)
