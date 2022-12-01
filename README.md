@@ -1,61 +1,57 @@
-# Horizon Keyboard
-<insert picture of pcb prototype>
+# SO[H] ORTHO!
 
+A 52 key (4x14) ortholinear keyboard, powered by an RP2040
 
-SO[H]ORTHO! is a 52 key (4x14) ortholinear keyboard, powered by an RP2040
+This is a fork of [Horizon by skarrmann](https://github.com/skarrmann/horizon)
 
+Used License [MIT](/LICENSE)
+
+ ---
 This keyboard is a grid of 1U keys with optional hotswap, breakout for LED-backlighting.
 
-## Project structure
 
-* [`gerbers`](gerbers): Gerber files for PCB manufacturing
-* [`graphics`](graphics): Source assets for PCB silkscreen
-* [`kicad`](kicad): KiCad project files (schematics and PCB designs)
-* [`kicad-libraries`](kicad-libraries): KiCad components and footprints
-* [`kicad-plugins`](kicad-plugins): KiCad Pcbnew Python plugins
-* [`images`](images): Images for project documentation
+![](/images/pcb_banner.JPG)
 
-## PCBs
+## Status :: 
+- prototypes arrived and **working**
+- Case to be tested 
+- untested LEDs
+- untested LED-Pinout
+- working encoder  
 
-Two separate PCB designs are available for MX and Choc keyswitches, with their respective footprints and key spacing (MX: 19mm x 19mm, Choc: 18mm x 17mm).
+---
 
-Each design consists of a main PCB, a top plate to protect the microcontroller, and a bottom plate to protect the bottom components:
+## Features :: 
+- QMK and Vial Support
+- Support for Choc-Switches **only**!
+- Choc-spacing 
+- Hotswap for Choc-Switches 
+- built with rp2040 and additional flash storage allowing for plenty of combos, layers, led matrices etc.
+- easy to order with jlcpcb --> check release for files 
+- support for encoder in the middle  
+- additional pinouts for further modifications 
+- middle part features several layouts
 
-![Horizon MX PCBs photo](images/horizon-mx-pcbs.jpg)
+## Layout :: 
 
-The bottom plate is a cutout of all the components exposed through the bottom of the main PCB, and screws *directly* against the main PCB. This nicely guards you and your desk surface from all the pointy through-hole bits, while retaining a low keyboard height:
+This pcb features different layouts that are configured within VIAL for easy usage. See below for available Layout-Options. 
 
-![Horizon Choc + MX complete build bottom photo](images/horizon-choc-mx-bottom.jpg)
+As for the case, there are 6 screw holes for mounting a panel in the middle to cover the electronics. 
 
-## KiCad project notes
+![](/images/layout.png)
 
-The bottom and top plates are generated via a custom KiCad 6 Python SWIG plugin [Horizon Board Producer](kicad-plugins/horizon-board-producer-plugin.py).
 
-For the plugin to generate these plate boards, the PCB and its footprints use the following layer convention:
 
-* `F.Adhesive` designates top plate holes and edge cuts.
-* `B.Adhesive` designates bottom plate holes and edge cuts.
+## Firmware :: 
 
-When the board producer runs, these layers are used as follows:
+the pre-compiled file for Vial and the whole Qmk-userspace for this keyboard can be found [here](/firmware/)
 
-* On the board and footprints:
-    * Graphics on the plate's designated layer will be moved to `Edge.Cuts` when producing that plate.
-    * As with all edge cuts, please make sure your graphics are non-overlapping closed shapes.
-* On footprints only:
-    * Pads of type "SMD Aperture" and shape "Circular/Oval" on the plate's designated layer will be converted to proper NPTH pads.
-    * Note only circular/oval shapes are supported for these pads, because they are the only available hole/drill shapes. If you need a fancy plate cutout shape on your footprint, then draw graphics lines on the designated layer.
-    * **IMPORTANT**: When adding pads solely for plate cutout purposes, set the technical layer to just the designated plate cutout layers. Leave all other technical layers unchecked.
+To enter the bootloader - which is necessary in order to flash a new firmware - you'll have to bridge the two contacts located in the middle of the front-pcb. In later revisions there might be actual buttons, for the first revision I was not able to get them to fit on there. Bridge both contacts for a short amount of time in order to boot the mcu to bootloader. It should show up as a regular usb-stick in your file explorer now and you can drag the .utf onto this usb-stick. Once done it will restart and use your newly flashed firmware!
 
-![Horizon KiCad plate edge cuts](images/horizon-kicad-plate-cuts.png)
-![Horizon KiCad footprint plate holes](images/horizon-kicad-footprint-plate-holes.png)
 
-Additionally, the board producer plugin will preserve any in-bounds "H" footprint pads (mounting holes), "LOGO" footprint graphics (custom silkscreen art), and board silkscreen on the plates. Other items which are not needed for plates (e.g., copper tracks and zones) are removed from the plates.
+## Images of PCB ::
 
-The board producer plugin also generates all the Gerber files for production.
+![](/images/pcb_front.JPG)
 
-Please note the board producer plugin expects the following folder structure:
-
-* The KiCad PCB file is two folders deep from the project root, e.g., `kicad/[board-version]/[board-name].kicad_pcb`
-* When the plugin executes, a folder called `temp` is created in the project root to store any temporary files created.
-    * Each time the board producer runs, any existing files in this temporary folder are deleted.
+![](/images/pcb_closeup.JPG)
 
